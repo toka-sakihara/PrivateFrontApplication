@@ -1,0 +1,25 @@
+﻿@namespace Systemsnow.Study.AccountManager.Shared.AccountList
+@using Systemsnow.Study.AccountManager.Data
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ユーザーID</th>
+            <th>苗字</th>
+            <th>名前</th>
+            <th>ユーザーの興味</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@accountDto.UserId</td>
+            <td>@accountDto.LastName</td>
+            <td>@accountDto.FirstName</td>
+            <td>@(string.Join(',', accountDto.Hobby) ?? null)</td>
+        </tr>
+    </tbody>
+</table>
+@code{
+    [Parameter]
+    public AccountDto accountDto { get; set; }
+}

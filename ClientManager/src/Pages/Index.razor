@@ -1,0 +1,55 @@
+﻿@page "/"
+
+@using Systemsnow.Study.AccountManager.Data
+@using Systemsnow.Study.AccountManager.Shared.AccountList;
+@using System.Net.Http.Json
+@using Microsoft.Extensions.Configuration;
+@inject HttpClient httpClient
+<h1>アカウント情報</h1>
+<AccountSearch OnSearchAccount="@OnSearchAccount" />
+
+<button class="btn btn-secondary" style="background-color:darkseagreen;" @onclick="OnInitializedAsync">更新</button>
+@if (!LoadFlag)
+{
+    <h3>
+        <font color="red"><span class="oi oi-warning" aria-hidden="true"></span>読み込み中にエラーが発生しました。</font>
+    </h3>
+}
+else if (accounts == null)
+{
+    <h3>読み込み中です。</h3>
+}
+else
+{
+    <AccountTable accountListDto="accounts" />
+}
+
+
+@code {
+    private AccountListDto accounts;
+
+    private bool LoadFlag;
+
+    private bool DeleteDialogFlag;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            this.LoadFlag = true;
+            accounts = await httpClient.GetFromJsonAsync<AccountListDto>("account");
+        }
+        catch
+        {
+            this.LoadFlag = false;
+        }
+    }
+
+    void OnSearchAccount(AccountDto? accountDto, bool loadFlag)
+    {
+        this.LoadFlag = loadFlag;
+        accounts.AccountList = new List<AccountDto>();
+        if (accountDto != null){accounts.AccountList.Add(accountDto);}
+        StateHasChanged();
+    }
+}
