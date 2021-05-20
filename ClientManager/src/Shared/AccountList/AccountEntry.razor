@@ -1,0 +1,29 @@
+﻿@namespace Systemsnow.Study.AccountManager.Shared.AccountList
+@using Systemsnow.Study.AccountManager.Data
+@using System.Net.Http.Json
+@using Microsoft.Extensions.Configuration;
+@using System.ComponentModel.DataAnnotations;
+@inject HttpClient httpClient
+    <tr>
+        <td>@accountDto.Id</td>
+        <td>@accountDto.UserId</td>
+        <td>@accountDto.LastName @accountDto.FirstName</td>
+        <td>@accountDto.LastUpdate</td>
+        <td>@(string.Join(',', accountDto.Hobby) ?? null)</td>
+        <td>
+        <button class="btn btn-light alert-danger" @onclick="DeleteAccount">削除</button>
+        </td>
+    </tr>
+    @code {
+        [Parameter]
+        public AccountDto accountDto { get; set; }
+
+        [Parameter]
+        public Action<string> OnDeleteAccount { get; set; }
+
+        void DeleteAccount()
+        {
+            httpClient.DeleteAsync($"account/{accountDto.UserId}");
+            OnDeleteAccount(accountDto.UserId);
+        }
+    }
