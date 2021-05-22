@@ -13,45 +13,47 @@
 
 <EditForm Model="@accountModel" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
+    <CustomValidation @ref="CustomValidation" />
+    アカウントID<br />
+    <InputText id="text" @bind-Value="accountModel.UserId" disabled="@disabled" />
+    <ValidationMessage For="() => accountModel.UserId" />
+    <br />
 
-    <ValidationSummary />
-        アカウントID<br />
-        <InputText id="text" @bind-Value="accountModel.UserId" disabled="@disabled" />
-        <CustomValidation @ref="CustomValidation" />
-        <br />
+    苗字<br />
+    <InputText id="text" @bind-Value="accountModel.LastName" disabled="@disabled" />
+    <ValidationMessage For="() => accountModel.LastName" />
+    <br />
 
-        苗字<br />
-        <InputText id="text" @bind-Value="accountModel.LastName" disabled="@disabled" />
-        <br />
+    名前<br />
+    <InputText id="text" @bind-Value="accountModel.FirstName" disabled="@disabled" />
+    <ValidationMessage For="() => accountModel.FirstName" />
+    <br />
+    趣味<br />
+    <InputText id="text" @bind-Value="hobbyName" disabled="@disabled" />
+    <button type="button" class="btn-secondary btn" disabled="@disabled" @onclick="AddHobbyList">追加</button>
+    <ValidationMessage For="() => accountModel.Hobby" />
 
-        名前<br />
-        <InputText id="text" @bind-Value="accountModel.FirstName" disabled="@disabled" />
-        <br />
-        趣味<br />
-        <InputText id="text" @bind-Value="hobbyName" disabled="@disabled" />
-        <button type="button" class="btn-secondary btn" disabled="@disabled" @onclick="AddHobbyList">追加</button>
+    <table>
+        @foreach (var hobby in accountModel.Hobby)
+        {
+            <tr>
+                <td>・@hobby</td>
+                <td><button type="button" class="btn btn-light alert-danger" disabled="@disabled" @onclick="@(e => RemoveHobbyList(hobby))">削除</button></td>
+            </tr>
 
-                <table>
-                    @foreach (var hobby in accountModel.Hobby)
-                    {
-                    <tr>
-                        <td>・@hobby</td>
-                        <td><button type="button" class="btn btn-light alert-danger" disabled="@disabled" @onclick="@(e => RemoveHobbyList(hobby))">削除</button></td>
-                    </tr>
-                        
-                    }
-                </table>
+        }
+    </table>
 
-                <br />
+    <br />
 
-                <button type="submit" class="col-sm-2 btn btn-primary" disabled="@disabled">登録</button>
-                <p style="@messageStyles">
-                    @message
-                </p>
-                    @if (message == "ユーザー登録が完了しました。")
-                    {
-                        <AccountRegistedTable accountDto="@accountModel.GetAccountDto()"/>
-                    }
+    <button type="submit" class="col-sm-2 btn btn-primary" disabled="@disabled">登録</button>
+    <p style="@messageStyles">
+        @message
+    </p>
+    @if (disabled)
+    {
+        <AccountRegistedTable accountDto="@accountModel.GetAccountDto()" />
+    }
 </EditForm>
 
 @code {
@@ -107,12 +109,12 @@
         CustomValidation.ClearErrors();
         if (string.IsNullOrWhiteSpace(this.hobbyName))
         {
-            errors.Add(nameof(this.hobbyName), new List<string> { $"1文字以上必要です。" });
+            errors.Add(nameof(accountModel.Hobby), new List<string> { $"1文字以上必要です。" });
             CustomValidation.DisplayErrors(errors);
         }
         else if (accountModel.Hobby.Contains(this.hobbyName))
         {
-            errors.Add(nameof(this.hobbyName), new List<string> { $"{this.hobbyName}はすでに追加されています。" });
+            errors.Add(nameof(accountModel.Hobby), new List<string> { $"{this.hobbyName}はすでに追加されています。" });
             CustomValidation.DisplayErrors(errors);
         }
         else

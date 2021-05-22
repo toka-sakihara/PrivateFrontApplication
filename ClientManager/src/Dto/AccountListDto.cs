@@ -45,7 +45,7 @@ namespace Systemsnow.Study.AccountManager.Data
         /// <summary>
         /// ユーザーが興味を示したもの(カンマ区切り)
         /// </summary>
-        
+
         [JsonPropertyName("hobby")]
         #nullable enable
         public string[]? Hobby { get; set; }

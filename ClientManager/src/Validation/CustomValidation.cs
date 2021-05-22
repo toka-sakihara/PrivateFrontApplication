@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using System;
+using System.Collections.Generic;
 namespace Systemsnow.Study.AccountManager.Validation
 {
     public class CustomValidation : ComponentBase
     {
         private ValidationMessageStore messageStore;
-
         [CascadingParameter]
         private EditContext CurrentEditContext { get; set; }
         protected override void OnInitialized()
