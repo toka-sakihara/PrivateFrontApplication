@@ -361,6 +361,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-.db
+# database Data
+*.db
 
+# EFCore Migration Build File
 Migrations/
