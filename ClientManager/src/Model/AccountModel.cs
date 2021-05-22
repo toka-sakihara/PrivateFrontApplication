@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Systemsnow.Study.AccountManager.Data;
 namespace Systemsnow.Study.AccountManager.Model
 {
@@ -11,7 +10,7 @@ namespace Systemsnow.Study.AccountManager.Model
         /// ユーザーID
         /// </summary>
         [Required(ErrorMessage = "ユーザーIDは必須です。")]
-        [MaxLength(16,ErrorMessage = "ユーザーIDは16文字以内で入力してください。")]
+        [MaxLength(16, ErrorMessage = "ユーザーIDは16文字以内で入力してください。")]
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }
 
@@ -45,7 +44,7 @@ namespace Systemsnow.Study.AccountManager.Model
             return new AccountDto
             {
                 UserId = this.UserId,
-                FirstName= this.FirstName,
+                FirstName = this.FirstName,
                 LastName = this.LastName,
                 Hobby = this.Hobby.ToArray()
             };
