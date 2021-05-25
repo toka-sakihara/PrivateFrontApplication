@@ -8,7 +8,7 @@ using Systemsnow.Study.DummyAPI.Entity;
 namespace Systemsnow.Study.DummyAPI.Controllers
 {
     /// <summary>
-    /// アカウント作成API
+    /// アカウント更新API
     /// </summary>
     [ApiController]
     [Route("account")]

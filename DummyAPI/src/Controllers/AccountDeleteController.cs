@@ -5,7 +5,7 @@ using Systemsnow.Study.DummyAPI.Data;
 namespace Systemsnow.Study.DummyAPI.Controllers
 {
     /// <summary>
-    /// アカウント作成API
+    /// アカウント削除API
     /// </summary>
     [ApiController]
     [Route("account")]
