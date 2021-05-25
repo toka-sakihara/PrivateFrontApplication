@@ -9,7 +9,7 @@ namespace Systemsnow.Study.DummyAPI.Dto
     public class AccountSearchResponseDto
     {
         /// <summary>
-        /// �R���X�g���N�^
+        /// コンストラクタ
         /// </summary>
         /// <param name="accountEntity"></param>
         public AccountSearchResponseDto(AccountEntity accountEntity)
@@ -29,32 +29,32 @@ namespace Systemsnow.Study.DummyAPI.Dto
         public int Id { get; set; }
 
         /// <summary>
-        /// ���[�U�[ID
+        /// ユーザーID
         /// </summary>
         [JsonPropertyName("user_id")]
 
         public string UserId { get; set; }
 
         /// <summary>
-        /// ���O
+        /// 名前
         /// </summary>
         [JsonPropertyName("first_name")]
         public string FirstName { get; set; }
 
         /// <summary>
-        /// �c��
+        /// 苗字
         /// </summary>
         [JsonPropertyName("last_name")]
         public string LastName { get; set; }
 
         /// <summary>
-        /// �A�J�E���g�쐬��
+        /// 更新日時
         /// </summary>
         [JsonPropertyName("last_update")]
         public DateTime LastUpdate { get; set; }
 
         /// <summary>
-        /// ���[�U�[������������������
+        /// ユーザーの趣味
         /// </summary>
         [JsonPropertyName("hobby")]
         public IList<string> Hobby { get; set; }
