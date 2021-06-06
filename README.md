@@ -1,2 +1,2 @@
-# PrivateFromtApplication
+# PrivateFrontApplication
 Blazor Study Repository
